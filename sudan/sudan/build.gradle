@@ -1,0 +1,28 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+    useLibrary 'org.apache.http.legacy'
+    defaultConfig {
+        applicationId "com.example.sudan"
+        minSdkVersion 16
+        targetSdkVersion 18
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile project(':main')
+    compile 'com.google.android.gms:play-services:+'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile files('libs/glide-3.6.1.jar')
+    compile files('libs/picasso-2.5.2.jar')
+
+}
