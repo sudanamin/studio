@@ -383,19 +383,22 @@ public class MainActivity extends ActionBarActivity {
 
 			pager.setAdapter(adapter);
 			toolbar = (Toolbar) findViewById(R.id.tool_bar);
+			setSupportActionBar(toolbar);
+			getSupportActionBar().setTitle("");
 			// getSupportActionBar().setDisplayShowHomeEnabled(true);
 			// getSupportActionBar().setIcon(R.drawable.ic_action);
 			// toolbar.setic();
-			toolbar.setNavigationIcon(R.drawable.splash);
-			TextView title = (TextView) findViewById(R.id.title);
+			//toolbar.setNavigationIcon(R.drawable.good);
+			//toolbar.setNavigationIcon();
+		/*	TextView title = (TextView) findViewById(R.id.title);
 
 			Typeface type = Typeface.createFromAsset(getAssets(), "Lato-Regular.ttf");
 			Spanned text = Html.fromHtml("   <i>MARKAVip</i> ");
 
 			title.setTypeface(type);
-			title.setText(text);
+			//title.setText(text);
 			title.setTextSize(17);
-			title.setTextColor(0xFFffffff);
+			title.setTextColor(0xFFffffff);*/
 			//toolbar.setTitle("amin");
 			setSupportActionBar(toolbar);
 			// toolbar.settext

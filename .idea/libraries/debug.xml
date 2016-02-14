@@ -1,0 +1,42 @@
+<component name="libraryTable">
+  <library name="debug">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-fitness-8.3.0_b3209dc9e7c61135c1b7b6aae67f514f80f62e57.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-safetynet-8.3.0_cb5da425973cfb0719e047e8c81a734359f17f42.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-panorama-8.3.0_fa52f4ba0ebd4094228ec40d61bce8835bafeb48.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/glide-3.6.1_a49e8a121995b8f327b6e98e55388cbef66e897c.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.1.1_2a5f0231ab09e30e55ef0bb609723030b79006ea.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/sudan-main-unspecified_9d1470b0a48f66827600965de07002c6292018ed.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.android.support-mediarouter-v7-22.2.0_bbdd1727d313760532411234fbb06fc079d59a48.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-auth-8.3.0_4bf9d5de3f90592e82b6253bec211e3f8c82064d.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-identity-8.3.0_55d4ba4e591d6567f52363c94d32611a68e47bd4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/debug_9c5bd2c574bcb190d8d06a2d285499d008abc57e.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-maps-8.3.0_45756406720402911e2f6ca32a32a728bba14af3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-vision-8.3.0_d2d2ad4bfce1ac8e048d3d04d75e6966b4c1abe2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-wearable-8.3.0_e6db91513bd2265d43ab214d468964f76f152e7d.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.facebook.shimmer-shimmer-0.1.0_11fa3424dca37f4d01a579084b3345e04e2afd9e.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/internal_impl-22.2.0_e14ec01e6ed04074918ab1751df72584d3ed1b2d.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-wallet-8.3.0_9286a2bd587ad543213ce406fff56dcc9be1715f.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-drive-8.3.0_b1717bbef069e84d6528c6d1d9258c94ce26e196.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/support-annotations-23.1.1_c054deeed331d35989f9f3cb757be11330bf1d2c.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-location-8.3.0_66125c5454a5f9fcec61d559dd09a4c0ac9dc40d.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-nearby-8.3.0_12082d7a0ba6f576d2ea071fa2e2297fae2f256a.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-8.3.0_fbe949f645789588a0d25fd5ad5a4d4806d4ed99.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.1.1_cd34e37f100916820ce1430b3abd36dae61947b6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-plus-8.3.0_dff872f5579df99d9dca63dd85abcc3999eff1fc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-ads-8.3.0_0bc133e62d1791c0468493c1a3a66196eb373d6f.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-8.3.0_8a927bd7489163fb558e23114a51a5e02f691acc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-gcm-8.3.0_e305ec979025cf51b1b1402358d32ac4bd5c71d3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-games-8.3.0_6a95ad57015398b5c9e51622bf5d26d3adcfcf60.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_8c4f8d1cbcb7ef1e3ef539e0440c6fc82c0234c0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-cast-8.3.0_3a377487263c098c14484c0f6bccbbd1b1dd6725.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-appindexing-8.3.0_c4b248538a317b99d4093bcbff280d470d4a03f8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-measurement-8.3.0_a326a4c1f0b648b063faacd5d715a046acb00913.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-analytics-8.3.0_8880c5bbd86b6235b9bd83edeed6abf42550153a.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-appinvite-8.3.0_ac8309e2dd4555cfac2994bc5cd3ba95d1d842b2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/New folder/sudan/sudan/build/intermediates/pre-dexed/debug/picasso-2.5.2_9889d663b12159a88d8f1710063391ca44595ed8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

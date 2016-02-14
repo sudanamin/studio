@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\Aminov\\Desktop\\sudan\\sudan\\build\\intermediates\\res\\merged\\debug\\values-w820dp-v13\\values-w820dp-v13.xml",
+        "outputFile": "C:\\Users\\Aminov\\Dropbox\\studio\\sudan\\sudan\\build\\intermediates\\res\\merged\\debug\\values-w820dp-v13\\values-w820dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 108
                 },
                 "from": {
-                    "file": "C:\\Users\\Aminov\\Desktop\\sudan\\sudan\\src\\main\\res\\values-w820dp\\dimens.xml",
+                    "file": "C:\\Users\\Aminov\\Dropbox\\studio\\sudan\\sudan\\src\\main\\res\\values-w820dp\\dimens.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="debug3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/shimmer/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.1.1_a5dbf8dae7899442d8acb3de27fca7419dc8b506.jar!/" />
+      <root url="jar://$PROJECT_DIR$/shimmer/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1_c0192756f34b23369e9fd76943a50c7d9fbbb11e.jar!/" />
+      <root url="jar://$PROJECT_DIR$/shimmer/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.1.1_16a1ab44da4db0d46b0ab7b84f6ec0888407d20e.jar!/" />
+      <root url="jar://$PROJECT_DIR$/shimmer/app/build/intermediates/pre-dexed/debug/com.android.support-design-23.1.1_e9dbcdd7fea48a686921c08bfb4519a5441ae785.jar!/" />
+      <root url="jar://$PROJECT_DIR$/shimmer/app/build/intermediates/pre-dexed/debug/com.facebook.shimmer-shimmer-0.1.0_7db7818a94a21173749a21ccee352e483c52c846.jar!/" />
+      <root url="jar://$PROJECT_DIR$/shimmer/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.1.1_3e8305ae6d5bb6012f85fcf04c8cd859b5f758b0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/shimmer/app/build/intermediates/pre-dexed/debug/debug_39f0c23b1800a60ee34077ffa567b9da3c2655f2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/shimmer/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_65d49f4096ced6a15415b1f2182b0b8aa3b2cb37.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

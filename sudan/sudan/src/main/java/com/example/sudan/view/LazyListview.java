@@ -16,6 +16,8 @@ import com.example.sudan.adapters.ViewPagerAdapter;
 
 import com.example.sudan.util.GetData;
 import com.example.sudan.util.SlidingTabLayout;
+import com.facebook.shimmer.ShimmerFrameLayout;
+import com.squareup.picasso.Picasso;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -40,10 +42,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -93,36 +97,54 @@ public class LazyListview extends Fragment {
 	JSONArray images = null;
 	String TAG_mainimage = "mainimage";
 	JSONArray mainimage = null;
-	LinearLayout layou;
+	RelativeLayout layou;
+
+	RelativeLayout maintxt;
+
+	String tabname;
+
+	Typeface typeface ;
+	Typeface viewsale;
+	TextView mt;
+	Button mainbutton;
+	ImageView mainim;
 	LinearLayout also_layou;
 	private static String also_url = "http://sudan.besaba.com/productjsontest.php?id=";
 	Context con;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.activity_lazy_listview,container,false);
+        View v =inflater.inflate(R.layout.activity_lazy_listview, container, false);
         Context thiscontext = container.getContext();
-        String tabname = getArguments().getString("title", "man");
+         tabname = getArguments().getString("title", "man");
         
         
         System.out.println("title from fragment " +tabname);
         
         gridView = (GridView)v.findViewById(R.id.gridview);
-        
+
+		 mt = (TextView) v.findViewById (R.id.txtframe);
+		mainbutton =(Button) v.findViewById(R.id.btnAddTitle );
+		typeface = Typeface.createFromAsset(getActivity().getAssets(), "Zurich.ttf");
+		viewsale = Typeface.createFromAsset(getActivity().getAssets(), "Lato-Regular.ttf");
         also_layou = (LinearLayout) v.findViewById(R.id.also);
         also alsolike = new also(thiscontext);
         alsolike.execute(also_url + "" + 18);
         
         
         
-    	layou = (LinearLayout) v.findViewById(R.id.linear);
+    	layou = (RelativeLayout) v.findViewById(R.id.main);
+		maintxt = (RelativeLayout) v.findViewById(R.id.maintxt);
+		// mainim = (ImageView) v.findViewById(R.id.mainim);
         
         String imaurl = "http://sudan.besaba.com/mainimage.txt";
+		//String imaurl = "http://sudan.besaba.com/titlesjson.php";
         
        
         mainimage ima = new mainimage(thiscontext);
         ima.execute(imaurl);
-        
-        
+
+
+
       GetData getdata = new GetData(gridView, adapter , getActivity(),tabname);
        // new GetData().execute(jsonurl);
         getdata.execute(jsonurl+""+tabname);
@@ -228,31 +250,61 @@ public class LazyListview extends Fragment {
 
 					// Storing each json item in variable
 
-					String name = c.getString("mainima");
+					//String name = c.getString("mainima");
+				   String name =   "http://sudan.besaba.com/titles/"+tabname;
+				//String name =  "http:\/\/sudan.besaba.com\/brands\/slide_01.jpg";
+                    System.out.println("hi i am name:"+name+" tab name is"+tabname);
 					//imageurl[0] = name;
 
-					ImageView imageView = new ImageView(cc);
+
+
+
+					ImageView mainim = new ImageView(cc);
 			        DisplayMetrics metrics = new DisplayMetrics();
 			        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
 			        int width = metrics.widthPixels; 
 			        
-			        int height = metrics.heightPixels *30/100;
+			        int height = metrics.heightPixels *20/100;
 			     	LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width, height);
-				    imageView.setLayoutParams(parms);
-				    String url = name;
+				    mainim.setLayoutParams(parms);
+				   // String url = name;
 				    //String url = "http://sudan.besaba.com/brands/slide_01.jpg";
-				    imageView.setScaleType(ScaleType.FIT_XY);
-				    Glide.with(cc)
+			    	mainim.setScaleType(ScaleType.FIT_XY);
+
+				    String url = name;
+				    Picasso.with(cc)
 					   .load(url)
-					   .into(imageView);
+					   .into(mainim);
 				    
-				    layou.addView(imageView);
-				    
+				    layou.addView(mainim);
+
+
+
+
+				
+				
+
+				//TextView maintext = new TextView(cc);
+				//TextView mt = (TextView) v.findViewById (R.id.txtframe);
+
+				/*RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mt.getLayoutParams();
+				lp.addRule(RelativeLayout.BELOW,mainim);
+				mt.setLayoutParams(lp);*/
+				mt.setText("Club L & More");
+               // mt.setTextColor(0x347513c);
+				//Typeface typeface = Typeface.createFromAsset(activity.getAssets(), "Lato-Regular.ttf");
+				mt.setTypeface(typeface);
+				mainbutton.setTypeface(viewsale);
+
+				//mt.setTypeface();
+				//maintxt.add
+
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		
-                  
+
 	
 
 		}
@@ -393,7 +445,7 @@ public class LazyListview extends Fragment {
 			        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
 			        int width = metrics.widthPixels; 
 			        
-			        int height = metrics.heightPixels *20/100;
+			        int height = metrics.heightPixels *15/100;
 			     	LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width, height);
 				//parms.leftMargin = 10;
 				parms.leftMargin = 0;

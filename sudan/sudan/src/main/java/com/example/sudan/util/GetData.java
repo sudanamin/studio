@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.StringTokenizer;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -160,7 +161,9 @@ public  class GetData extends AsyncTask<String, Void, JSONObject> {
 				String id= c.getString(TAG_ID);
 				ids[i]= id;
 			    
-				String name = c.getString(TAG_NAME);
+				String fullname = c.getString(TAG_NAME);
+				StringTokenizer tokens = new StringTokenizer(fullname, ".");
+				String name = tokens.nextToken();
 				names[i]= name;
 				
 				String url = c.getString(TAG_url);

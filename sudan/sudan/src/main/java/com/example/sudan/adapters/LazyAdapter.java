@@ -11,6 +11,7 @@ import com.example.sudan.R;
 import com.example.sudan.details;
 import com.example.sudan.products;
 import com.example.sudan.view.SquareImageView;
+import com.squareup.picasso.Picasso;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 //import com.example.sudan.FullScreenViewActivity;
@@ -68,6 +70,8 @@ public class LazyAdapter extends BaseAdapter {
         
         ImageView picture;
         TextView name;
+        Button note;
+
         if(convertView == null)
             vi = inflater.inflate(R.layout.gridview_item, null);
  
@@ -83,8 +87,11 @@ public class LazyAdapter extends BaseAdapter {
 
          picture = (SquareImageView)vi.findViewById(R.id.picture);
         name = (TextView)vi.findViewById(R.id.text);
+        note = (Button)vi.findViewById(R.id.note);
+        //note.setVi
+        Double i = Math.random();
+        if(i<0.5 ){note.setText("New");note.setVisibility(Button.VISIBLE);}
 
-      
 
       //  picture.setImageResource(item.drawableId);
         name.setText(items_name[position]);
@@ -95,7 +102,7 @@ public class LazyAdapter extends BaseAdapter {
         String ccurrent_activity = activity.getLocalClassName();
         Log.e("activity iiiiiiiii is ", " i am hereeeeeeee "  +ccurrent_activity);
         
-        Glide.with(activity.getApplicationContext())
+        Picasso.with(activity.getApplicationContext())
 		   .load(data[position])
 		   .into(picture);
         

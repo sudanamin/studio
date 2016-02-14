@@ -2,25 +2,78 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+
+    >
     <com.example.sudan.view.SquareImageView
         android:id="@+id/picture"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         />
-    <TextView
-        android:id="@+id/text"
+
+    <RelativeLayout
+        android:id="@+id/maintxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:background="@drawable/rounded_corner"
+
+        android:clickable="true"
         android:layout_gravity="bottom"
-        android:ellipsize="start"
-        android:singleLine="true"
-        android:textColor="#55000000"
-        android:background="@android:color/white"
-        />
+
+
+        >
+
+        <TextView
+
+            android:id="@+id/text"
+
+            android:text="default"
+            android:textSize="16sp"
+
+            android:background="@drawable/border"
+
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="2dp"
+            android:paddingRight="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_gravity="bottom"
+
+            android:singleLine="true"
+            android:textColor="#55000000"
+
+
+
+            >
+
+
+        </TextView>
+
+        <Button
+            android:id="@+id/note"
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+
+            android:textSize="14sp"
+            android:background="@drawable/orange"
+            android:layout_centerVertical="true"
+            android:paddingRight="10dp"
+            android:paddingLeft="5dp"
+            android:visibility="invisible"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/white"
+
+            />
+
+    </RelativeLayout>
+
 </FrameLayout>
