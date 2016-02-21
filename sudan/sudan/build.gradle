@@ -1,3 +1,10 @@
+
+repositories {
+    maven { url "https://jitpack.io" }
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
 apply plugin: 'com.android.application'
 
 android {
@@ -23,8 +30,12 @@ dependencies {
 
     compile 'com.google.android.gms:play-services:8.3.0'
     compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+
     compile files('libs/glide-3.6.1.jar')
     compile files('libs/picasso-2.5.2.jar')
     compile 'com.facebook.shimmer:shimmer:0.1.0@aar'
-
+    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.github.lsjwzh.RecyclerViewPager:lib:v1.1.0-beta5'
+    compile 'com.github.lsjwzh.RecyclerViewPager:tablayoutsupport:v1.1.0-beta5'
 }

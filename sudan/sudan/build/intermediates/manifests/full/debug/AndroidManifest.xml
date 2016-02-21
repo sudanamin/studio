@@ -54,6 +54,14 @@
             android:label="@string/activity_name" >
         </activity>
         <activity
+            android:name="com.example.sudan.util.NoData"
+            android:label="@string/activity_name" >
+        </activity>
+        <activity
+            android:name="com.example.sudan.util.Noconnection"
+            android:label="@string/activity_name" >
+        </activity>
+        <activity
             android:name="com.example.sudan.gcm.ReceiveActivity"
             android:label="@string/activity_name" >
         </activity>

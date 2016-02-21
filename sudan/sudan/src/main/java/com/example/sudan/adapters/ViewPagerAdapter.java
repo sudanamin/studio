@@ -9,11 +9,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
+
+import java.util.LinkedHashMap;
 
 /**
  * Created by Edwin on 15/02/2015.
  */
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class ViewPagerAdapter extends FragmentStatePagerAdapter  {
+
+
+	LinkedHashMap<Integer, Fragment> mFragmentCache = new LinkedHashMap<>();
 
 	CharSequence Titles[]; // This will Store the Titles of the Tabs which are
 							// Going to be passed when ViewPagerAdapter is
@@ -38,28 +44,28 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 	//	switch (position) {
 //		case 0: // if the position is 0 we are returning the First tab
 	//	{
-			LazyListview lazy = newInstance(Titles[position]);
-			
-			return lazy;
-/*		}
-		case 1: // As we are having 2 tabs if the position is now 0 it must be 1
-				// so we are returning second tab
-		{
-			Tab2 tab2 = new Tab2();
-			return tab2;
-		}
-		case 2: {
-			Tab3 tab3 = new Tab3();
-			return tab3;
-		}
-		case 3: {
-			Tab4 tab4 = new Tab4();
-			return tab4;
-		}
 
-		default:
-			return null;
+
+		Fragment f = mFragmentCache.containsKey(position) ? mFragmentCache.get(position)
+				:   newInstance(Titles[position]);
+		Log.e("test", "getItem:" + position + " from cache" + mFragmentCache.containsKey
+				(position));
+	/*	if (savedState == null || f.getArguments() == null) {
+			Bundle bundle = new Bundle();
+			bundle.putString("title", (String) Titles[position]);
+			f.setArguments(bundle);
+			Log.e("test", "setArguments:" + Titles[position]);
+		} else if (!mFragmentCache.containsKey(position)) {
+			f.setInitialSavedState(savedState);
+			Log.e("test", "setInitialSavedState:" + position);
 		}*/
+		//f= newInstance(Titles[position]);
+		mFragmentCache.put(position, f);
+		return f;
+		//	LazyListview lazy = newInstance(Titles[position]);
+			
+		//	return lazy;
+
 	}
 
 	// This method return the titles for the Tabs in the Tab Strip

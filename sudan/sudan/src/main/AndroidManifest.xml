@@ -50,6 +50,18 @@
     android:name=".details" 
     android:label="@string/activity_name">
 </activity>
+
+        <activity
+            android:name=".util.NoData"
+            android:label="@string/activity_name">
+        </activity>
+
+
+        <activity
+            android:name=".util.Noconnection"
+            android:label="@string/activity_name">
+        </activity>
+
    <activity
             android:name=".gcm.ReceiveActivity"
             android:label="@string/activity_name" >
