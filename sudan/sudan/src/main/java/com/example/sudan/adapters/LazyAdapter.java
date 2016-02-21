@@ -104,6 +104,7 @@ public class LazyAdapter extends BaseAdapter {
         
         Picasso.with(activity.getApplicationContext())
 		   .load(data[position])
+                .placeholder(R.drawable.img_def)
 		   .into(picture);
         
         picture.setOnClickListener(new OnImageClickListener(position));

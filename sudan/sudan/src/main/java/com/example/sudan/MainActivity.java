@@ -1,12 +1,38 @@
 package com.example.sudan;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.sudan.adapters.ViewPagerAdapter;
+import com.example.sudan.util.ConnectionDetector;
+import com.example.sudan.util.Noconnection;
+import com.example.sudan.util.SlidingTabLayout;
+import com.example.sudan.view.LazyListview;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.lsjwzh.widget.recyclerviewpager.FragmentStatePagerAdapter;
+import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
+import com.lsjwzh.widget.recyclerviewpager.TabLayoutSupport;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,35 +46,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.sudan.adapters.ViewPagerAdapter;
-import com.example.sudan.util.GetData;
-import com.example.sudan.util.SlidingTabLayout;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-
-import com.example.sudan.R;
 //import android.R;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Typeface;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.text.Spanned;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by Edwin on 15/02/2015.
@@ -88,32 +95,44 @@ public class MainActivity extends ActionBarActivity {
 	SlidingTabLayout tabs;
 	CharSequence Titles[] = { "Home ", " Events ", " Montana ", " Alhilal " };
 	int Numboftabs = 4;
+	ConnectionDetector cd;
 
 	// @SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		getTabsName getabs = new getTabsName(this, adapter, pager);
-		String tabsurl = "http://sudan.besaba.com/titlesjson.php";
-		getabs.execute(tabsurl);
 
-		/////////////////////////////////////////////////////////////////
-
-		// mDisplay = (TextView) findViewById(R.id.display);
+		cd = new ConnectionDetector(getApplicationContext());
 		context = getApplicationContext();
-		if (checkPlayServices()) {
-			gcm = GoogleCloudMessaging.getInstance(this);
-			regid = getRegistrationId(context);
-			Toast.makeText(getApplicationContext(), regid, Toast.LENGTH_LONG).show();
-			if (regid.isEmpty()) {
-				new RegisterBackground().execute();
+
+		if (!cd.isConnectingToInternet()) {
+			Intent intent = new Intent(context, Noconnection.class);
+            System.out.println("hi i am amin");
+			startActivity(intent);
+		} else {
+
+			getTabsName getabs = new getTabsName(this, adapter, pager);
+			String tabsurl = "http://sudan.besaba.com/titlesjson.php";
+			getabs.execute(tabsurl);
+
+			/////////////////////////////////////////////////////////////////
+
+			// mDisplay = (TextView) findViewById(R.id.display);
+
+			if (checkPlayServices()) {
+				gcm = GoogleCloudMessaging.getInstance(this);
+				regid = getRegistrationId(context);
+				Toast.makeText(getApplicationContext(), regid, Toast.LENGTH_LONG).show();
+				if (regid.isEmpty()) {
+					new RegisterBackground().execute();
+				}
+
 			}
 
+			////////////////////////////////////////////////////////////////
+
 		}
-
-		////////////////////////////////////////////////////////////////
-
 	}
 
 	@Override
@@ -263,10 +282,12 @@ public class MainActivity extends ActionBarActivity {
 
 		public String[] tabsName;
 		public String[] tabsN = { "hassab ", " asdf ", " sdf ", " sdf " };
-	//	String TAG_tabs = "titles";
+		//	String TAG_tabs = "titles";
 		ViewPagerAdapter adapter;
 		Activity activity;
 		ViewPager pager;
+		protected RecyclerViewPager mRecyclerView;
+		private FragmentsAdapter mAdapter;
 
 		public getTabsName(Activity activity, ViewPagerAdapter adapter, ViewPager pager) {
 
@@ -331,65 +352,71 @@ public class MainActivity extends ActionBarActivity {
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
 
-			try {
-				// Getting Array of Contacts
-				tabbb = result.getJSONArray( TAG_tabs );
-				tabsName = new String[tabbb.length()];
+			if (result == null) {
+				Toast.makeText(activity, "Cannot Convert!!", Toast.LENGTH_LONG).show();
+				//float set to 0
+			} else {
 
-				// looping through All Contacts
-				for (int i = 0; i < tabbb.length(); i++) {
 
-					JSONObject c = tabbb.getJSONObject(i);
+				try {
+					// Getting Array of Contacts
+					tabbb = result.getJSONArray(TAG_tabs);
+					tabsName = new String[tabbb.length()];
 
-					// Storing each json item in variable
+					// looping through All Contacts
+					for (int i = 0; i < tabbb.length(); i++) {
 
-					String name = c.getString("title");
-					tabsName[i] = name;
+						JSONObject c = tabbb.getJSONObject(i);
 
+						// Storing each json item in variable
+
+						String name = c.getString("title");
+						tabsName[i] = name;
+
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
 				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			// tabsN = tabsName;
-			// Log.d("tabsN", tabsN[0]);
-			// System.out.println("tabbbbnnnnn"+tabsN);
-			// settadapter(tabsname);
-			// gettabs();
-			// . gettabs(tabsname);
+				// tabsN = tabsName;
+				// Log.d("tabsN", tabsN[0]);
+				// System.out.println("tabbbbnnnnn"+tabsN);
+				// settadapter(tabsname);
+				// gettabs();
+				// . gettabs(tabsname);
 			/*
 			 * int Numboftabs = tabsname.length; CharSequence Titles[]; Titles =
 			 * tabsname; // FragmentManager fm =
 			 * this.activity.FragmentManager();
-			 * 
+			 *
 			 * adapter = new ViewPagerAdapter(getSupportFragmentManager(),
 			 * Titles, Numboftabs);
 			 */
-			// adapter=new ViewPagerAdapter( this.activity, urls,tabsname,ids);
-			// gridView.setAdapter(adapter);
+				// adapter=new ViewPagerAdapter( this.activity, urls,tabsname,ids);
+				// gridView.setAdapter(adapter);
 
-			setContentView(R.layout.activity_main);
+				setContentView(R.layout.activity_main);
 
-			// Creating The Toolbar and setting it as the Toolbar for the
-			// activity
+				// Creating The Toolbar and setting it as the Toolbar for the
+				// activity
 
-			System.out.println("kkkkkkkkkkkkkkkk" + tabsName[0]);
-			int Numboftabs = tabsName.length;
-			CharSequence Titles[];
-			Titles = tabsName;
+				System.out.println("kkkkkkkkkkkkkkkk" + tabsName[0]);
+				int Numboftabs = tabsName.length;
+				//CharSequence Titles[];
+				Titles = tabsName;
 
-			adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
-			// Numboftabs);
-			pager = (ViewPager) findViewById(R.id.pager);
+				//adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
+				// Numboftabs);
+				//pager = (ViewPager) findViewById(R.id.pager);
 
-			pager.setAdapter(adapter);
-			toolbar = (Toolbar) findViewById(R.id.tool_bar);
-			setSupportActionBar(toolbar);
-			getSupportActionBar().setTitle("");
-			// getSupportActionBar().setDisplayShowHomeEnabled(true);
-			// getSupportActionBar().setIcon(R.drawable.ic_action);
-			// toolbar.setic();
-			//toolbar.setNavigationIcon(R.drawable.good);
-			//toolbar.setNavigationIcon();
+				//pager.setAdapter(adapter);
+				toolbar = (Toolbar) findViewById(R.id.tool_bar);
+				setSupportActionBar(toolbar);
+				getSupportActionBar().setTitle("");
+				// getSupportActionBar().setDisplayShowHomeEnabled(true);
+				// getSupportActionBar().setIcon(R.drawable.ic_action);
+				// toolbar.setic();
+				//toolbar.setNavigationIcon(R.drawable.good);
+				//toolbar.setNavigationIcon();
 		/*	TextView title = (TextView) findViewById(R.id.title);
 
 			Typeface type = Typeface.createFromAsset(getAssets(), "Lato-Regular.ttf");
@@ -399,69 +426,100 @@ public class MainActivity extends ActionBarActivity {
 			//title.setText(text);
 			title.setTextSize(17);
 			title.setTextColor(0xFFffffff);*/
-			//toolbar.setTitle("amin");
-			setSupportActionBar(toolbar);
-			// toolbar.settext
+				//toolbar.setTitle("amin");
+				//setSupportActionBar(toolbar);
+				// toolbar.settext
+				initViewPager();
+				initTabLayout();
 
-			// Creating The ViewPagerAdapter and Passing Fragment Manager,
-			// Titles
-			// fot the Tabs and Number Of Tabs.
-			// Activity activity = (Activity) context;
 
-			// new GetData().execute(jsonurl);
-			// new GetData().execute(jsonurl);
-			tabs = (SlidingTabLayout) findViewById(R.id.tabs);
+			}
+		}
 
-			tabs.setViewPager(pager);
 
-			// String [] tab = getabs.gettabs();
-			// Log.d("main activity gettabs", tab[0]);
-			// int Numboftabs = tab.length;
-			// CharSequence Titles[];
-			// Titles = tab;
-			// AsyncTask<String, String, String> tabsnames =
-			// getabs.execute(tabsurl);
 
-			// adapter = new ViewPagerAdapter(getSupportFragmentManager(),
-			// Titles,
-			// Numboftabs);
 
-			// Assigning ViewPager View and setting the adapter
-			// pager = (ViewPager) findViewById(R.id.pager);
-			// pager.setAdapter(adapter);
-			//
-			// Assiging the Sliding Tab Layout View
 
-			// tabs.setDistributeEvenly(true); // To make the Tabs Fixed set
-			// this true,
-			// This makes the tabs Space Evenly in
-			// Available width
 
-			// Setting Custom Color for the Scroll bar indicator of the Tab View
-			/*
-			 * tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-			 * 
-			 * @Override public int getIndicatorColor(int position) { return
-			 * getResources().getColor(R.color.tabsScrollColor); } });
-			 */
-			tabs.setSelectedIndicatorColors(getResources().getColor(R.color.indicator));
+		private void initTabLayout() {
+			//给TabLayout增加Tab, 并关联ViewPager
+			TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+			TabLayoutSupport.setupWithViewPager(tabLayout, mRecyclerView, mAdapter);
+			//tabLayout.setTypeface(type);
+		}
 
-			tabs.setDividerColors(getResources().getColor(R.color.Dividercolor));
-			tabs.setBackgroundColor(getResources().getColor(R.color.aminbackground));
-			// tabs.setDividerColors(getResources().getColor(
-			// R.color.Dividercolor));
-			/*
-			 * tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-			 * 
-			 * @Override public int getIndicatorColor(int position) { return
-			 * getResources().getColor(R.color.white); //define any color in xml
-			 * resources and set it here, I have used white }
-			 * 
-			 * @Override public int getDividerColor(int position) { return
-			 * getResources().getColor(R.color.white); } });
-			 */
-			// Setting the ViewPager For the SlidingTabsLayout
+		protected void initViewPager() {
+			mRecyclerView = (RecyclerViewPager) findViewById(R.id.viewpager);
+			LinearLayoutManager layout = new LinearLayoutManager(this.activity, LinearLayoutManager.HORIZONTAL,
+					false);
+			mRecyclerView.setLayoutManager(layout);
+			mAdapter = new FragmentsAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+			mRecyclerView.setAdapter(mAdapter);
+			mRecyclerView.setHasFixedSize(false);
+			mRecyclerView.setLongClickable(false);
+			// mRecyclerView.addItemDecoration(new SpacesItemDecoration(50, mRecyclerView.getAdapter().getItemCount()));
+			mRecyclerView.addOnPageChangedListener(new RecyclerViewPager.OnPageChangedListener() {
+				@Override
+				public void OnPageChanged(int oldPosition, int newPosition) {
+					Log.d("test", "oldPosition:" + oldPosition + " newPosition:" + newPosition);
+				}
+			});
 
 		}
 	}
+	class FragmentsAdapter extends FragmentStatePagerAdapter implements TabLayoutSupport.ViewPagerTabLayoutAdapter {
+		LinkedHashMap<Integer, Fragment> mFragmentCache = new LinkedHashMap<>();
+
+		CharSequence Titles[]; // This will Store the Titles of the Tabs which are
+		// Going to be passed when ViewPagerAdapter is
+		// created
+		// int icons[] = {R.drawable}
+		int NumbOfTabs; // Store the number of tabs, this will also be passed when
+		public FragmentsAdapter(FragmentManager fm, CharSequence mTitles[], int mNumbOfTabsumb)
+		{
+			super(fm);
+			this.Titles = mTitles;
+			this.NumbOfTabs = mNumbOfTabsumb;
+		}
+
+		@Override
+		public Fragment getItem(int position, Fragment.SavedState savedState) {
+			Fragment f = mFragmentCache.containsKey(position) ? mFragmentCache.get(position)
+					: new LazyListview();
+			Log.e("test", "getItem:" + position + " from cache" + mFragmentCache.containsKey
+					(position));
+			if (savedState == null || f.getArguments() == null) {
+				Bundle bundle = new Bundle();
+				bundle.putString("title", (String) Titles[position]);
+				f.setArguments(bundle);
+				Log.e("test", "setArguments:" + position);
+			} else if (!mFragmentCache.containsKey(position)) {
+				f.setInitialSavedState(savedState);
+				Log.e("test", "setInitialSavedState:" + position);
+			}
+			mFragmentCache.put(position, f);
+			return f;
+		}
+		@Override
+		public void onDestroyItem(int position, Fragment fragment) {
+			// onDestroyItem
+			while (mFragmentCache.size() > 5) {
+				Object[] keys = mFragmentCache.keySet().toArray();
+				mFragmentCache.remove(keys[0]);
+			}
+		}
+
+		@Override
+		public String getPageTitle(int position) {
+			return (String) Titles[position];
+		}
+
+		@Override
+		public int getItemCount() {
+			return NumbOfTabs;
+		}
+	}
+
 }
+
+

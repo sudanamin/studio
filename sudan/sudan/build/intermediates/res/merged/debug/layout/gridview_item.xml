@@ -2,7 +2,7 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
 
     >
     <com.example.sudan.view.SquareImageView
@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
+        android:src="@drawable/img_def"
         />
 
     <RelativeLayout
@@ -38,8 +39,8 @@
 
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:paddingLeft="2dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:layout_gravity="bottom"

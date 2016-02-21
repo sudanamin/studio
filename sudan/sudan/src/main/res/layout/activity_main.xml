@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,30 +12,32 @@
         android:layout_height="52dp"
         android:layout_width="match_parent"
         />
-    
-    
-   
 
-    <com.example.sudan.util.SlidingTabLayout
+
+    <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:elevation="7dp"
-        android:background="@color/ColorPrimary"
+        android:layout_height="wrap_content"
+        app:tabGravity="fill"
+        app:tabMode="scrollable"/>
 
-    android:textSize="13sp"
-    android:textColor="@color/green"
-    
-                
-        
-        />
-      
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_height="0dp"
+
+    <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        ></android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"
+        android:paddingLeft="1dp"
+        android:paddingRight="1dp"
+        app:rvp_triggerOffset="0.1"
+        app:rvp_singlePageFling="false"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
+
+
+
+
+
 
 </LinearLayout>

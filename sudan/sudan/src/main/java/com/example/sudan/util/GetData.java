@@ -1,11 +1,11 @@
 package com.example.sudan.util;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.util.StringTokenizer;
+import android.app.Activity;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.GridView;
+
+import com.example.sudan.adapters.LazyAdapter;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,13 +16,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.sudan.adapters.LazyAdapter;
-
-import android.app.Activity;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.GridView;
-import android.widget.ImageView;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.StringTokenizer;
 
 public  class GetData extends AsyncTask<String, Void, JSONObject> {
 
@@ -204,11 +203,15 @@ public  class GetData extends AsyncTask<String, Void, JSONObject> {
         
         
         adapter=new LazyAdapter( this.activity, urls,names,ids);
+		//gridView.setnumro
+		gridView.setMinimumHeight(1000);
         gridView.setAdapter(adapter);
 
         
 
        
         }
-  
+
+
+
 }
